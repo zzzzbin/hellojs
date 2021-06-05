@@ -1,9 +1,19 @@
 import html from '../lib/core.js';
+import { connect } from '../store.js';
 
-function App() {
+const mapStateToProps = connect(state => ({
+  colors: state.colors
+}));
+
+function App(props) {
+  console.log('props', props); //colors: (3) ["red", "green", "blue"]
+  const { colors } = props;
   return html`
-    <h1>Hello world!!!</h1>
+    <ul>
+      ${colors.map(color => `<li>${color}</li>`)}
+    </ul>
+    <button onclick="dispatch('ADD_COLOR','yellow')">Add color</button>
   `;
 }
 
-export default App;
+export default mapStateToProps(App);
