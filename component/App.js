@@ -6,7 +6,6 @@ const mapStateToProps = connect(state => ({
 }));
 
 function App(props) {
-  console.log('props', props); //colors: (3) ["red", "green", "blue"]
   const { colors } = props;
   return html`
     <ul>
