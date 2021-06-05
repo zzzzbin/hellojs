@@ -1,6 +1,6 @@
 import { attach } from './store.js';
-import App from './component/App.js';
-attach(App, document.getElementById('root'));
+import App from './ex1/App.js';
+attach(App, document.querySelector('#root'));
 
 // attach(() => '<h1>Hello world</h1>', document.getElementById('root'));
 
