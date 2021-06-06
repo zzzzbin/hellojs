@@ -2,7 +2,21 @@ const init = {
   cars: ['BMW'],
   colors: ['red', 'green', 'blue'],
   tasks: ['reading', 'writing'],
-  archive: []
+  archive: [],
+  todos: [
+    {
+      title: 'Learn Javascript',
+      completed: false
+    },
+    {
+      title: 'Learn CSS',
+      completed: false
+    },
+    {
+      title: 'Learn HTML',
+      completed: true
+    }
+  ]
 };
 function merge(...objs) {
   return Object.assign({}, ...objs);
