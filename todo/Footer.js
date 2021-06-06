@@ -1,8 +1,13 @@
 import html from '../lib/core.js';
-function Footer() {
+import { connect } from '../store.js';
+function Footer(props) {
+  const { todos, filters } = props;
   return html`
     <footer class="footer">
-      <span class="todo-count"><strong>0</strong> item left</span>
+      <span class="todo-count"
+        ><strong>${todos.filter(filters.active).length}</strong>
+        item${todos.filter(filters.active).length > 1 && 's'} left</span
+      >
       <ul class="filters">
         <li>
           <a class="selected" href="#/">All</a>
@@ -19,4 +24,4 @@ function Footer() {
   `;
 }
 
-export default Footer;
+export default connect()(Footer);
