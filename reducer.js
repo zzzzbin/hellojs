@@ -10,7 +10,8 @@ const init = {
     all: () => true,
     active: todo => !todo.completed,
     completed: todo => todo.completed
-  }
+  },
+  editedTodo: null
 };
 // function merge(...objs) {
 //   return Object.assign({}, ...objs);
@@ -47,6 +48,24 @@ const actions = {
       .filter(index => index !== false)
       .reverse()
       .map(index => actions.remove({ todos }, index)).length;
+  },
+  editStart(state, index) {
+    state.editedTodo = state.todos[index];
+  },
+  editEnd(state, title) {
+    const { editedTodo, todos } = state;
+    if (editedTodo) {
+      editedTodo.title = title.trim();
+      if (!editedTodo.title) {
+        todos.splice(todos.indexOf(editedTodo), 1);
+      }
+      //exit edit mode
+      state.editedTodo = null;
+      storage.set(todos);
+    }
+  },
+  editCancel(state) {
+    state.editedTodo = null;
   }
 };
 export default function reducer(state = init, action, args) {
