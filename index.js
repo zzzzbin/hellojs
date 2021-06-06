@@ -1,5 +1,5 @@
 import { attach } from './store.js';
-import App from './ex1/App.js';
+import App from './todo/App.js';
 attach(App, document.querySelector('#root'));
 
 // attach(() => '<h1>Hello world</h1>', document.getElementById('root'));
