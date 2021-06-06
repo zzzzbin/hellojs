@@ -16,11 +16,14 @@ const init = {
 //   return Object.assign({}, ...objs);
 // }
 const actions = {
-  add({ todos }, newTodo) {
+  add(state, newTodo) {
     if (newTodo && newTodo.trim()) {
-      todos.push({ title: newTodo.trim(), completed: false });
+      state.todos.push({
+        title: newTodo.trim(),
+        completed: false
+      });
+      storage.set(state.todos);
     }
-    storage.set(todos);
   },
   toggle({ todos }, index) {
     const todo = todos[index];
@@ -37,6 +40,13 @@ const actions = {
   },
   switchFilter(state, newFilter) {
     state.filter = newFilter;
+  },
+  clearCompleted({ todos }) {
+    todos
+      .map((todo, index) => todo.completed && index)
+      .filter(index => index !== false)
+      .reverse()
+      .map(index => actions.remove({ todos }, index)).length;
   }
 };
 export default function reducer(state = init, action, args) {
