@@ -10,8 +10,10 @@ const init = {
 //   return Object.assign({}, ...objs);
 // }
 const actions = {
-  add({ todos }, title) {
-    todos.push({ title, completed: false });
+  add({ todos }, newTodo) {
+    if (newTodo && newTodo.trim()) {
+      todos.push({ title: newTodo.trim(), completed: false });
+    }
     storage.set(todos);
   }
 };
