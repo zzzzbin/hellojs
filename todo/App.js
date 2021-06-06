@@ -2,12 +2,15 @@ import html from '../lib/core.js';
 import Header from './Header.js';
 import TodoList from './TodoList.js';
 import Footer from './Footer.js';
-function App() {
+import { connect } from '../store.js';
+function App(props) {
+  const { todos } = props;
   return html`
     <section class="todoapp">
-      ${Header()} ${TodoList()} ${Footer()}
+      ${Header()} ${todos.length > 0 && TodoList()}
+      ${todos.length > 0 && Footer()}
     </section>
   `;
 }
 
-export default App;
+export default connect()(App);

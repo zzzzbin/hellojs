@@ -1,29 +1,18 @@
+import storage from './lib/todoStorage.js';
 const init = {
   cars: ['BMW'],
   colors: ['red', 'green', 'blue'],
   tasks: ['reading', 'writing'],
   archive: [],
-  todos: [
-    {
-      title: 'Learn Javascript',
-      completed: false
-    },
-    {
-      title: 'Learn CSS',
-      completed: false
-    },
-    {
-      title: 'Learn HTML',
-      completed: true
-    }
-  ]
+  todos: storage.get()
 };
 // function merge(...objs) {
 //   return Object.assign({}, ...objs);
 // }
 const actions = {
   add({ todos }, title) {
-    return todos.push({ title, completed: false });
+    todos.push({ title, completed: false });
+    storage.set(todos);
   }
 };
 export default function reducer(state = init, action, args) {
