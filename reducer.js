@@ -4,7 +4,13 @@ const init = {
   colors: ['red', 'green', 'blue'],
   tasks: ['reading', 'writing'],
   archive: [],
-  todos: storage.get()
+  todos: storage.get(),
+  filter: 'all',
+  filters: {
+    all: () => true,
+    active: todo => !todo.completed,
+    completed: todo => todo.completed
+  }
 };
 // function merge(...objs) {
 //   return Object.assign({}, ...objs);
@@ -19,6 +25,10 @@ const actions = {
   toggle({ todos }, index) {
     const todo = todos[index];
     todo.completed = !todo.completed;
+    storage.set(todos);
+  },
+  toggleAll({ todos }, completed) {
+    todos.forEach(todo => (todo.completed = completed));
     storage.set(todos);
   }
 };
