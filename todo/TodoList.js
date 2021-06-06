@@ -3,7 +3,7 @@ import TodoItem from './TodoItem.js';
 import { connect } from '../store.js';
 function TodoList(props) {
   console.log('TEST', props);
-  const { todos, filters } = props;
+  const { todos, filter, filters } = props;
   return html`
     <section class="main">
       <input
@@ -15,7 +15,9 @@ function TodoList(props) {
       />
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        ${todos.map((todo, index) => TodoItem({ todo: todo, index }))}
+        ${todos
+          .filter(filters[filter])
+          .map((todo, index) => TodoItem({ todo: todo, index }))}
       </ul>
     </section>
   `;

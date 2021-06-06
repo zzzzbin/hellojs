@@ -1,7 +1,7 @@
 import html from '../lib/core.js';
 import { connect } from '../store.js';
 function Footer(props) {
-  const { todos, filters } = props;
+  const { todos, filter, filters } = props;
   return html`
     <footer class="footer">
       <span class="todo-count"
@@ -9,15 +9,18 @@ function Footer(props) {
         item${todos.filter(filters.active).length > 1 && 's'} left</span
       >
       <ul class="filters">
-        <li>
-          <a class="selected" href="#/">All</a>
-        </li>
-        <li>
-          <a href="#/active">Active</a>
-        </li>
-        <li>
-          <a href="#/completed">Completed</a>
-        </li>
+        ${Object.keys(filters).map(
+          key => html`
+            <li>
+              <a
+                class="${filter === key && 'selected'}"
+                href="#"
+                onclick="dispatch('switchFilter','${key}')"
+                >${key[0].toUpperCase() + key.substring(1)}</a
+              >
+            </li>
+          `
+        )}
       </ul>
       <button class="clear-completed">Clear completed</button>
     </footer>

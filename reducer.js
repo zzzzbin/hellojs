@@ -34,6 +34,9 @@ const actions = {
   remove({ todos }, index) {
     todos.splice(index, 1);
     storage.set(todos);
+  },
+  switchFilter(state, newFilter) {
+    state.filter = newFilter;
   }
 };
 export default function reducer(state = init, action, args) {
