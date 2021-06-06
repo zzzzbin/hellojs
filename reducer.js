@@ -15,6 +15,11 @@ const actions = {
       todos.push({ title: newTodo.trim(), completed: false });
     }
     storage.set(todos);
+  },
+  toggle({ todos }, index) {
+    const todo = todos[index];
+    todo.completed = !todo.completed;
+    storage.set(todos);
   }
 };
 export default function reducer(state = init, action, args) {
